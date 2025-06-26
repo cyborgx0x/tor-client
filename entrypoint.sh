@@ -13,8 +13,9 @@ if [ $CONFIGURED -eq "0" ]; then
   fi
 
   echo "HashedControlPassword" `/usr/bin/tor --hash-password $PASSWORD` >> /tmp/torrc
-
 fi
 
 cat /tmp/torrc
-/usr/bin/tor -f /tmp/torrc
+
+# Start supervisord which will manage tor
+exec /usr/bin/supervisord -c /etc/supervisord.conf
